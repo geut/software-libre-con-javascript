@@ -1,5 +1,8 @@
 var css = require('sheetify')
 var choo = require('choo')
+var chooSlides = require('@geut/choo-slides')
+var mySlides = require('./slides')
+var notFoundView = require('./slides/404')
 
 css('tachyons')
 
@@ -7,12 +10,11 @@ var app = choo()
 if (process.env.NODE_ENV !== 'production') {
   app.use(require('choo-devtools')())
 } else {
-  app.use(require('choo-service-worker')())
+  // Enable once you want service workers support. At the moment you'll
+  // need to insert the file names yourself & bump the dep version by hand.
+  // app.use(require('choo-service-worker')())
 }
 
-app.use(require('./stores/clicks'))
+app.use(chooSlides({ slides: mySlides, notFoundView: notFoundView }))
 
-app.route('/', require('./views/main'))
-app.route('/*', require('./views/404'))
-
-module.exports = app.mount('body')
+app.mount('body')

@@ -11,9 +11,11 @@
     "test-deps": "dependency-check . && dependency-check . --extra --no-dev -i tachyons"
   },
   "dependencies": {
+    "@geut/choo-slides": "^1.0.1",
     "choo": "^6.11.0-preview1",
     "choo-service-worker": "^2.4.0",
     "sheetify": "^7.3.2",
+    "stream-to-promise": "^2.2.0",
     "tachyons": "^4.9.1"
   },
   "devDependencies": {
