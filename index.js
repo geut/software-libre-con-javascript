@@ -1,20 +1,31 @@
-var css = require('sheetify')
-var choo = require('choo')
-var chooSlides = require('@geut/choo-slides')
-var mySlides = require('./slides')
-var notFoundView = require('./slides/404')
+#! /usr/bin/env node
 
-css('tachyons')
+const diffy = require('diffy')()
+const trim = require('diffy/trim+newline')
+const { readFile } = require('fs')
+const { promisify } = require('util')
 
-var app = choo()
-if (process.env.NODE_ENV !== 'production') {
-  app.use(require('choo-devtools')())
-} else {
-  // Enable once you want service workers support. At the moment you'll
-  // need to insert the file names yourself & bump the dep version by hand.
-  // app.use(require('choo-service-worker')())
+const readFileAsync = promisify(readFile)
+
+const getDailyQuote = () => {
+
+    return readFileAsync('./quotes.json')
+        .then(data => JSON.parse(data))
+        .then(parsed => parsed.quotes[Math.floor(Math.random() * parsed.quotes.length)])
 }
 
-app.use(chooSlides({ slides: mySlides, notFoundView: notFoundView }))
+(async () => {
+    try {
+        const quote = await getDailyQuote()
+        diffy.render(function () {
+            return trim(`
+                RMS daily:
+                ${quote}\n
+            `)
+        })
+    } catch (e) {
+        console.error('Ooops', e.message)
+        process.exit(1)
+    }
+})()
 
-app.mount('body')

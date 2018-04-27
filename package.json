@@ -1,0 +1,33 @@
+{
+  "name": "rmsdaily",
+  "version": "1.0.0",
+  "description": "A daily quote from RMS as a CLI. This is a just demo project :)",
+  "bin": {
+    "rmsdaily": "index.js"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "diffy": "^2.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/geut/software-libre-con-javascript.git"
+  },
+  "keywords": [
+    "cli",
+    "rms",
+    "free",
+    "software",
+    "flisol"
+  ],
+  "author": "GEUT",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/geut/software-libre-con-javascript/issues"
+  },
+  "homepage": "https://github.com/geut/software-libre-con-javascript#readme"
+}
